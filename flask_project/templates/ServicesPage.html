@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Services - Pilgrimage Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: #f5f6fa;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+
+        .tab {
+            padding: 15px 30px;
+            background: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1em;
+            white-space: nowrap;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .tab.active {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .sort-controls {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 20px;
+            gap: 10px;
+        }
+
+        .sort-select {
+            padding: 8px;
+            border: 2px solid #dfe6e9;
+            border-radius: 5px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .service-content {
+            padding: 20px;
+        }
+
+        .service-title {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            color: #2d3436;
+        }
+
+        .service-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            color: #636e72;
+        }
+
+        .rating {
+            color: #f1c40f;
+        }
+
+        .service-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        .btn-primary {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #f5f6fa;
+            color: #2d3436;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #636e72;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="tabs">
+            <button class="tab active">🛏️ Accommodation</button>
+            <button class="tab">🚌 Transport</button>
+            <button class="tab">🍽️ Food</button>
+            <button class="tab">🏥 Medical</button>
+            <button class="tab">👥 Assistance</button>
+        </div>
+
+        <div class="sort-controls">
+            <select class="sort-select">
+                <option value="price">Sort by Price</option>
+                <option value="distance">Sort by Distance</option>
+                <option value="rating">Sort by Rating</option>
+            </select>
+        </div>
+
+        <div class="services-grid" id="servicesGrid">
+            <!-- Services will be dynamically loaded here -->
+        </div>
+    </div>
+
+    <script>
+        // Sample service data
+        const services = [
+            {
+                type: 'accommodation',
+                title: 'Hotel Riverside',
+                image: 'https://source.unsplash.com/300x200/?hotel',
+                rating: 4.5,
+                distance: '0.5 km',
+                price: '₹2000/night'
+            },
+            // Add more services here
+        ];
+
+        function createServiceCard(service) {
+            return `
+                <div class="service-card">
+                    <img src="${service.image}" alt="${service.title}" class="service-image">
+                    <div class="service-content">
+                        <h3 class="service-title">${service.title}</h3>
+                        <div class="service-info">
+                            <span class="rating">★ ${service.rating}</span>
+                            <span>${service.distance}</span>
+                            <span>${service.price}</span>
+                        </div>
+                        <div class="service-actions">
+                            <button class="btn btn-primary">Book Now</button>
+                            <button class="btn btn-secondary">More Info</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Initialize services
+        const servicesGrid = document.getElementById('servicesGrid');
+        services.forEach(service => {
+            servicesGrid.innerHTML += createServiceCard(service);
+        });
+
+        // Tab switching
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelector('.tab.active').classList.remove('active');
+                tab.classList.add('active');
+                // Add logic to filter services by type
+            });
+        });
+
+        // Sorting
+        document.querySelector('.sort-select').addEventListener('change', (e) => {
+            // Add sorting logic here
+        });
+    </script>
+</body>
+</html>

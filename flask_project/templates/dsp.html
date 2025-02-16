@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Destination - Pilgrimage Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            height: 100vh;
+        }
+
+        .sidebar {
+            padding: 20px;
+            background: white;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            z-index: 2;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #dfe6e9;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .destinations-grid {
+            height: calc(100vh - 150px);
+            overflow-y: auto;
+        }
+
+        .destination-card {
+            padding: 15px;
+            border-bottom: 1px solid #dfe6e9;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .destination-card:hover {
+            background: #f5f6fa;
+        }
+
+        .destination-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .destination-card h3 {
+            margin: 10px 0;
+            color: #2d3436;
+        }
+
+        .destination-card p {
+            color: #636e72;
+            font-size: 0.9em;
+        }
+
+        #map {
+            width: 100%;
+            height: 100vh;
+        }
+
+        .next-step {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 15px 30px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: none;
+            z-index: 3;
+        }
+
+        .next-step.active {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(100px); }
+            to { transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <input type="text" class="search-bar" placeholder="Search destinations...">
+            <div class="destinations-grid">
+                <!-- Destination cards will be populated here -->
+            </div>
+        </div>
+        <div id="map"></div>
+    </div>
+    
+    <button class="next-step">Continue to Plan → </button>
+
+    <script>
+        let map;
+        let markers = [];
+        let selectedDestination = null;
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: 20, lng: 77 },
+                zoom: 5
+            });
+
+            // Sample destinations data
+            const destinations = [
+                {
+                    name: 'Varanasi',
+                    position: { lat: 25.3176, lng: 82.9739 },
+                    description: 'Ancient holy city on the banks of River Ganges'
+                },
+                {
+                    name: 'Tirupati',
+                    position: { lat: 13.6288, lng: 79.4192 },
+                    description: 'Home to the famous Venkateswara Temple'
+                }
+                // Add more destinations as needed
+            ];
+
+            // Create markers and cards
+            destinations.forEach(dest => {
+                const marker = new google.maps.Marker({
+                    position: dest.position,
+                    map: map,
+                    title: dest.name
+                });
+
+                const card = createDestinationCard(dest);
+                document.querySelector('.destinations-grid').appendChild(card);
+
+                marker.addListener('click', () => selectDestination(dest));
+                markers.push(marker);
+            });
+        }
+
+        function createDestinationCard(dest) {
+            const card = document.createElement('div');
+            card.className = 'destination-card';
+            card.innerHTML = `
+                <img src="https://source.unsplash.com/400x300/?${dest.name},temple" alt="${dest.name}">
+                <h3>${dest.name}</h3>
+                <p>${dest.description}</p>
+            `;
+            card.addEventListener('click', () => selectDestination(dest));
+            return card;
+        }
+
+        function selectDestination(dest) {
+            selectedDestination = dest;
+            document.querySelector('.next-step').classList.add('active');
+            map.panTo(dest.position);
+            map.setZoom(12);
+        }
+    </script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap">
+    </script>
+</body>
+</html>

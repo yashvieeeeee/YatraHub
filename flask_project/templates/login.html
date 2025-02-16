@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login/Signup - Pilgrimage Guide</title>
+    <style>
+        :root {
+            --primary-color: #e74c3c;
+            --error-color: #e74c3c;
+            --success-color: #2ecc71;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f5f6fa;
+            padding: 20px;
+        }
+
+        .login-container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .form-title {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #2d3436;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #636e72;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #dfe6e9;
+            border-radius: 5px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+
+        .password-strength {
+            height: 5px;
+            margin-top: 5px;
+            border-radius: 3px;
+            background: #dfe6e9;
+            transition: all 0.3s;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-google {
+            background: white;
+            border: 2px solid #dfe6e9;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .divider {
+            margin: 20px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 45%;
+            height: 1px;
+            background: #dfe6e9;
+        }
+
+        .divider::before { left: 0; }
+        .divider::after { right: 0; }
+
+        .links {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .links a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .form-container {
+            display: none;
+        }
+
+        .form-container.active {
+            display: block;
+        }
+
+        .toggle-form {
+            margin-top: 20px;
+            text-align: center;
+            color: var(--primary-color);
+            cursor: pointer;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body { background: #2d3436; }
+            .login-container { 
+                background: #2d3436; 
+                box-shadow: 0 0 20px rgba(0,0,0,0.3);
+            }
+            .form-title { color: #f5f6fa; }
+            .form-group label { color: #dfe6e9; }
+            .form-group input {
+                background: #353b48;
+                border-color: #636e72;
+                color: #f5f6fa;
+            }
+            .btn-google {
+                background: #353b48;
+                color: #f5f6fa;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div id="loginForm" class="form-container active">
+            <h2 class="form-title">Welcome Back</h2>
+            <form>
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" required autocomplete="email">
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" required>
+                    <div class="password-strength"></div>
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+                
+                <div class="links">
+                    <a href="#forgot-password">Forgot Password?</a>
+                </div>
+                <div class="toggle-form" onclick="toggleForm('signup')">
+                    Don't have an account? Sign up
+                </div>
+            </form>
+        </div>
+
+        <div id="signupForm" class="form-container">
+            <h2 class="form-title">Create Account</h2>
+            <form>
+                <div class="form-group">
+                    <label for="signupName">Full Name</label>
+                    <input type="text" id="signupName" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail">Email</label>
+                    <input type="email" id="signupEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">Password</label>
+                    <input type="password" id="signupPassword" required>
+                    <div class="password-strength"></div>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Sign Up</button>
+                
+                <div class="toggle-form" onclick="toggleForm('login')">
+                    Already have an account? Login
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function toggleForm(form) {
+            document.getElementById('loginForm').classList.toggle('active');
+            document.getElementById('signupForm').classList.toggle('active');
+        }
+
+        // Password strength indicator
+        const passwordInputs = document.querySelectorAll('input[type="password"]');
+        const strengthIndicators = document.querySelectorAll('.password-strength');
+
+        passwordInputs.forEach((input, index) => {
+            if (input.id !== 'confirmPassword') {
+                input.addEventListener('input', (e) => {
+                    const password = e.target.value;
+                    let strength = 0;
+                    
+                    if(password.length >= 8) strength += 25;
+                    if(/[A-Z]/.test(password)) strength += 25;
+                    if(/[0-9]/.test(password)) strength += 25;
+                    if(/[^A-Za-z0-9]/.test(password)) strength += 25;
+                    
+                    const indicator = strengthIndicators[index];
+                    indicator.style.width = `${strength}%`;
+                    
+                    if(strength <= 25) indicator.style.background = '#e74c3c';
+                    else if(strength <= 50) indicator.style.background = '#f1c40f';
+                    else if(strength <= 75) indicator.style.background = '#3498db';
+                    else indicator.style.background = '#2ecc71';
+                });
+            }
+        });
+    </script>
+</body>
+</html>

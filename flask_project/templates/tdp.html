@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Details - Pilgrimage Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: #f5f6fa;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        .progress-bar {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .progress-step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step-number {
+            width: 30px;
+            height: 30px;
+            background: #e74c3c;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+        }
+
+        .progress-bar::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #dfe6e9;
+            z-index: 0;
+        }
+
+        .form-group {
+            margin-bottom: 30px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            color: #2d3436;
+            font-weight: bold;
+        }
+
+        .counter-input {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .counter-btn {
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: #e74c3c;
+            color: white;
+            font-size: 1.5em;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .counter-value {
+            font-size: 1.2em;
+            min-width: 40px;
+            text-align: center;
+        }
+
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: #c0392b;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="progress-bar">
+            <div class="progress-step">
+                <div class="step-number">1</div>
+                <p>Destination</p>
+            </div>
+            <div class="progress-step">
+                <div class="step-number">2</div>
+                <p>Details</p>
+            </div>
+            <div class="progress-step">
+                <div class="step-number">3</div>
+                <p>Services</p>
+            </div>
+        </div>
+
+        <form id="travelDetailsForm">
+            <div class="form-group">
+                <label>Number of Travelers</label>
+                <div class="counter-input">
+                    <button type="button" class="counter-btn" onclick="updateCounter('adults', -1)">-</button>
+                    <span id="adults" class="counter-value">1</span>
+                    <button type="button" class="counter-btn" onclick="updateCounter('adults', 1)">+</button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Children (under 12)</label>
+                <div class="counter-input">
+                    <button type="button" class="counter-btn" onclick="updateCounter('children', -1)">-</button>
+                    <span id="children" class="counter-value">0</span>
+                    <button type="button" class="counter-btn" onclick="updateCounter('children', 1)">+</button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Special Requirements</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="wheelchair">
+                        <label for="wheelchair">Wheelchair Access</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="senior">
+                        <label for="senior">Senior Assistance</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="dietary">
+                        <label for="dietary">Special Dietary Needs</label>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">Find Available Services</button>
+        </form>
+    </div>
+
+    <script>
+        function updateCounter(id, change) {
+            const element = document.getElementById(id);
+            let value = parseInt(element.textContent);
+            value = Math.max(id === 'adults' ? 1 : 0, value + change);
+            element.textContent = value;
+        }
+
+        document.getElementById('travelDetailsForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = {
+                adults: parseInt(document.getElementById('adults').textContent),
+                children: parseInt(document.getElementById('children').textContent),
+                wheelchair: document.getElementById('wheelchair').checked,
+                senior: document.getElementById('senior').checked,
+                dietary: document.getElementById('dietary').checked
+            };
+            console.log('Form Data:', formData);
+            // Add your form submission logic here
+        });
+    </script>
+</body>
+</html>

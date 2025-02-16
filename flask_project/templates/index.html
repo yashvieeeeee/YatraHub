@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pilgrimage Guide - Start Your Journey</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .hero {
+            height: 60vh;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+                        url('https://source.unsplash.com/1600x900/?temple,pilgrimage') no-repeat center;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-content h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .cta-button {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .cta-button:hover {
+            background-color: #c0392b;
+        }
+
+        .search-section {
+            padding: 40px;
+            text-align: center;
+        }
+
+        .search-box {
+            padding: 10px;
+            width: 300px;
+            font-size: 1.1em;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .how-it-works {
+            padding: 60px 20px;
+            background-color: #f9f9f9;
+        }
+
+        .steps {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .step {
+            flex-basis: 300px;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background-color: #e74c3c;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 1.5em;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .social-links a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Begin Your Sacred Journey</h1>
+            <p>Discover and plan your pilgrimage to holy sites around the world</p>
+            <button class="cta-button">Start Your Journey</button>
+        </div>
+    </div>
+
+    <div class="search-section">
+        <input type="text" class="search-box" placeholder="Search for a pilgrimage site...">
+    </div>
+
+    <section class="how-it-works">
+        <h2 style="text-align: center; margin-bottom: 40px;">How It Works</h2>
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Choose Your Destination</h3>
+                <p>Browse through our curated list of sacred sites</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Plan Your Visit</h3>
+                <p>Get detailed information and travel guidance</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Start Your Pilgrimage</h3>
+                <p>Embark on your spiritual journey</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="social-links">
+            <a href="#">Facebook</a>
+            <a href="#">Twitter</a>
+            <a href="#">Instagram</a>
+        </div>
+        <p style="margin-top: 20px;">Contact us: contact@pilgrimageapp.com</p>
+    </footer>
+</body>
+</html>
