@@ -1,2 +1,13 @@
-Flask 
-python-dotenv 
+Flask
+python-dotenv
+flask-sqlalchemy
+flask-login
+flask-migrate
+flask-wtf
+pdfkit
+reportlab
+google-generativeai
+aiohttp
+requests
+werkzeug
+wtforms
