@@ -1,0 +1,83 @@
+<!-- filepath: /e:/VSCODE/help-me/flask_project/templates/itinerary_template.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Trip Itinerary</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .container { width: 80%; margin: auto; }
+        .card { border: 1px solid #ccc; border-radius: 5px; padding: 20px; margin-bottom: 20px; }
+        .card-title { font-size: 1.5em; margin-bottom: 10px; }
+        .card-text { margin-bottom: 10px; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Trip Itinerary for {{ trip.destination }}</h1>
+        
+        <table>
+            <tr>
+                <th>Dates</th>
+                <td>From: {{ start_date }}<br>To: {{ end_date }}</td>
+            </tr>
+            <tr>
+                <th>Travelers</th>
+                <td>{{ travelers }}</td>
+            </tr>
+            <tr>
+                <th>Accommodation</th>
+                <td>{{ accommodation }}</td>
+            </tr>
+            <tr>
+                <th>Transportation</th>
+                <td>{{ transportation }}</td>
+            </tr>
+            <tr>
+                <th>Estimated Cost</th>
+                <td>${{ estimated_cost }}</td>
+            </tr>
+            <tr>
+                <th>Reason for Visiting</th>
+                <td>{{ reason_for_visiting }}</td>
+            </tr>
+        </table>
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">All Places of Interest</h5>
+                <ul>
+                {% for place in all_places %}
+                    <li>{{ place.name }} - {{ place.full_address }}</li>
+                {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Weather Information</h5>
+                <p class="card-text">Temperature: {{ weather_info.temperature }}°C</p>
+                <p class="card-text">Description: {{ weather_info.description }}</p>
+                <p class="card-text">Icon: {{ weather_info.icon }}</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Notes</h5>
+                <p class="card-text">{{ notes }}</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Gemini Itinerary</h5>
+                <div class="card-text">{{ gemini_info|safe }}</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}YatriHub: Places of Interest{% endblock %}
+
+{% block content %}
+    <h1 class="text-center my-4">Places of Interest Near {{ destination_data.display_name }}</h1>
+
+    {% if interests %}
+        <div id="map" style="height: 500px;" class="mb-4"></div>
+        <div class="row">
+            {% for interest in interests %}
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ interest.name }}</h5>
+                            <p class="card-text text-muted">{{ interest.full_address }}</p>
+                            <p class="card-text">Distance: {{ interest.distance }} meters</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-center">No places of interest found near your destination.</p>
+    {% endif %}
+
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        <button type="submit" class="btn btn-primary">Confirm</button>
+    </form>
+{% endblock %}
+
+{% block scripts %}
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var map = L.map('map').setView([{{ destination_data.latitude }}, {{ destination_data.longitude }}], 13);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            var circle = L.circle([{{ destination_data.latitude }}, {{ destination_data.longitude }}], {
+                color: 'blue',
+                fillColor: '#30f',
+                fillOpacity: 0.2,
+                radius: 4000
+            }).addTo(map);
+
+            {% for interest in interests %}
+                L.marker([{{ interest.lat }}, {{ interest.lon }}]).addTo(map)
+                    .bindPopup("<b>{{ interest.name }}</b><br>{{ interest.full_address }}");
+            {% endfor %}
+        });
+    </script>
+{% endblock %}

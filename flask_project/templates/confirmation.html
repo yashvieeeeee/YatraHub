@@ -1,0 +1,134 @@
+<!-- filepath: /e:/VSCODE/help-me/flask_project/templates/confirmation.html -->
+{% extends 'base.html' %}
+
+{% block title %}YatriHub: Confirmation{% endblock %}
+
+{% block content %}
+    <h1><i class="fas fa-clipboard-check me-2"></i>Confirm Your Trip Details</h1>
+
+    <div class="card mb-3 shadow-sm">
+        <div class="card-body">
+            <h5 class="card-title"><i class="fas fa-map-marker-alt me-2"></i>Destination</h5>
+            <p class="card-text">{{ destination.display_name }}</p>
+        </div>
+    </div>
+
+    <div class="card mb-3 shadow-sm">
+        <div class="card-body">
+            <h5 class="card-title"><i class="fas fa-calendar-alt me-2"></i>Dates</h5>
+            <p class="card-text"><i class="fas fa-plane-departure me-2"></i>From: {{ dates.start_date }}</p>
+            <p class="card-text"><i class="fas fa-plane-arrival me-2"></i>To: {{ dates.end_date }}</p>
+            <p class="card-text"><i class="fas fa-users me-2"></i>Travelers: {{ dates.num_travelers }}</p>
+        </div>
+    </div>
+
+    <div class="card mb-3 shadow-sm">
+        <div class="card-body">
+            <h5 class="card-title"><i class="fas fa-hotel me-2"></i>Accommodation</h5>
+            <p class="card-text">{{ accommodation.accommodation_name }}</p>
+            {% if accommodation.accommodation_details %}
+                <p class="card-text"><i class="fas fa-info-circle me-2"></i>{{ accommodation.accommodation_details }}</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="card mb-3 shadow-sm">
+        <div class="card-body">
+            <h5 class="card-title"><i class="fas fa-route me-2"></i>Transportation</h5>
+            <p class="card-text">{{ transportation.transportation_method }}</p>
+        </div>
+    </div>
+
+    <div class="card mb-3 shadow-sm">
+        <div class="card-body">
+            <h5 class="card-title"><i class="fas fa-map-pin me-2"></i>Places of Interest</h5>
+            {% if interests.selected_places %}
+                <ul class="list-group list-group-flush">
+                {% for place in interests.selected_places %}
+                    <li class="list-group-item"><i class="fas fa-star me-2"></i>{{ place }}</li>
+                {% endfor %}
+                </ul>
+            {% else %}
+                <p class="text-muted"><i class="fas fa-info-circle me-2"></i>No places of interest selected.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="card mb-3 shadow-sm">
+        <div class="card-body">
+            <h5 class="card-title">All Places of Interest</h5>
+            {% if interests.all_places %}
+                <ul>
+                {% for place in interests.all_places %}
+                    <li>{{ place.name }} - {{ place.full_address }}</li>
+                {% endfor %}
+                </ul>
+            {% else %}
+                <p>No places of interest available.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="card mb-3 shadow-sm">
+        <div class="card-body">
+            <h5 class="card-title"><i class="fas fa-dollar-sign me-2"></i>Estimated Cost</h5>
+            <p class="card-text fs-4 text-primary">${{ estimated_cost|float }}</p>
+        </div>
+    </div>
+
+    <form method="POST" class="card shadow-sm mb-4">
+        <div class="card-body">
+            <div class="form-group">
+                <label for="notes" class="form-label">
+                    <i class="fas fa-pencil-alt me-2"></i>Additional Notes
+                </label>
+                <textarea class="form-control" id="notes" name="notes" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">
+                <i class="fas fa-save me-2"></i>Save Trip
+            </button>
+        </div>
+    </form>
+
+    {% if latest_trip %}
+        <h2><i class="fas fa-history me-2"></i>Latest Trip Details</h2>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead class="table-light">
+                    <tr>
+                        <th><i class="fas fa-map-marker-alt me-2"></i>Destination</th>
+                        <th><i class="fas fa-calendar-alt me-2"></i>Dates</th>
+                        <th><i class="fas fa-users me-2"></i>Travelers</th>
+                        <th><i class="fas fa-hotel me-2"></i>Accommodation</th>
+                        <th><i class="fas fa-route me-2"></i>Transportation</th>
+                        <th><i class="fas fa-map-pin me-2"></i>Places</th>
+                        <th><i class="fas fa-dollar-sign me-2"></i>Cost</th>
+                        <th><i class="fas fa-comment me-2"></i>Reason</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ latest_trip.destination }}</td>
+                        <td>{{ latest_trip.start_date }} to {{ latest_trip.end_date }}</td>
+                        <td>{{ latest_trip.travelers }}</td>
+                        <td>{{ latest_trip.accommodation }}</td>
+                        <td>{{ latest_trip.transportation }}</td>
+                        <td>{{ latest_trip.places_of_interest }}</td>
+                        <td>${{ latest_trip.estimated_cost }}</td>
+                        <td>{{ latest_trip.reason_for_visiting }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="btn-group mt-3">
+            <a href="{{ url_for('generate_latest_trip_pdf', trip_id=latest_trip.id) }}" 
+               class="btn btn-success">
+                <i class="fas fa-file-pdf me-2"></i>Generate PDF
+            </a>
+            <a href="{{ url_for('generate_latest_trip_itinerary_pdf_with_gemini', trip_id=latest_trip.id) }}" 
+               class="btn btn-success ms-2">
+                <i class="fas fa-calendar-week me-2"></i>Generate Itinerary
+            </a>
+        </div>
+    {% endif %}
+{% endblock %}

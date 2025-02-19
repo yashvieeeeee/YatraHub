@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block title %}YatriHub: Select Dates{% endblock %}
+
+{% block content %}
+    <div class="container py-4">
+        <h1 class="mb-4">
+            <i class="fas fa-calendar-alt me-2"></i>Choose your Travel Dates
+        </h1>
+
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <form method="POST">
+                    {{ form.hidden_tag() }}
+                    
+                    <div class="mb-4">
+                        <label for="start_date" class="form-label">
+                            <i class="fas fa-plane-departure me-2"></i>{{ form.start_date.label.text }}
+                        </label>
+                        {{ form.start_date(class="form-control date-picker", type="date") }}
+                        {% if form.start_date.errors %}
+                            <small class="text-danger">
+                                <i class="fas fa-exclamation-circle me-1"></i>{{ form.start_date.errors[0] }}
+                            </small>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="end_date" class="form-label">
+                            <i class="fas fa-plane-arrival me-2"></i>{{ form.end_date.label.text }}
+                        </label>
+                        {{ form.end_date(class="form-control date-picker", type="date") }}
+                        {% if form.end_date.errors %}
+                            <small class="text-danger">
+                                <i class="fas fa-exclamation-circle me-1"></i>{{ form.end_date.errors[0] }}
+                            </small>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="num_travelers" class="form-label">
+                            <i class="fas fa-users me-2"></i>{{ form.num_travelers.label.text }}
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="fas fa-user"></i>
+                            </span>
+                            {{ form.num_travelers(class="form-control", type="number", min="1") }}
+                        </div>
+                        {% if form.num_travelers.errors %}
+                            <small class="text-danger">
+                                <i class="fas fa-exclamation-circle me-1"></i>{{ form.num_travelers.errors[0] }}
+                            </small>
+                        {% endif %}
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="fas fa-arrow-right me-2"></i>Next
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Set minimum date as today for start_date
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('start_date').setAttribute('min', today);
+    
+    // Update end_date minimum when start_date changes
+    document.getElementById('start_date').addEventListener('change', function() {
+        const startDate = this.value;
+        document.getElementById('end_date').setAttribute('min', startDate);
+        
+        // If end_date is before new start_date, update it
+        const endDate = document.getElementById('end_date').value;
+        if (endDate && endDate < startDate) {
+            document.getElementById('end_date').value = startDate;
+        }
+    });
+});
+</script>
+{% endblock %}

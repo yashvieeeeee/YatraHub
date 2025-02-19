@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}YatriHub: Login{% endblock %}
+{% block title %}YatriHub: Sign Up{% endblock %}
 
 {% block content %}
 <div class="container">
@@ -8,8 +8,8 @@
         <div class="col-md-6">
             <div class="card mt-5 shadow">
                 <div class="card-header bg-primary text-white text-center py-3">
-                    <i class="fas fa-user-circle fa-3x mb-2"></i>
-                    <h2 class="mb-0">Login</h2>
+                    <i class="fas fa-user-plus fa-3x mb-2"></i>
+                    <h2 class="mb-0">Create Account</h2>
                 </div>
                 <div class="card-body p-4">
                     {% with messages = get_flashed_messages(with_categories=true) %}
@@ -23,7 +23,7 @@
                             {% endfor %}
                         {% endif %}
                     {% endwith %}
-                    <form method="POST" action="{{ url_for('login') }}">
+                    <form method="POST" action="{{ url_for('signup') }}">
                         {{ form.hidden_tag() }}
                         <div class="mb-3">
                             <label for="{{ form.username.id }}" class="form-label">
@@ -31,7 +31,7 @@
                             </label>
                             <div class="input-group">
                                 <span class="input-group-text"><i class="fas fa-at"></i></span>
-                                {{ form.username(class="form-control", placeholder="Enter your username") }}
+                                {{ form.username(class="form-control", placeholder="Choose a username") }}
                             </div>
                             {% if form.username.errors %}
                                 {% for error in form.username.errors %}
@@ -41,13 +41,13 @@
                                 {% endfor %}
                             {% endif %}
                         </div>
-                        <div class="mb-4">
+                        <div class="mb-3">
                             <label for="{{ form.password.id }}" class="form-label">
                                 <i class="fas fa-lock me-2"></i>{{ form.password.label.text }}
                             </label>
                             <div class="input-group">
                                 <span class="input-group-text"><i class="fas fa-key"></i></span>
-                                {{ form.password(class="form-control", placeholder="Enter your password") }}
+                                {{ form.password(class="form-control", placeholder="Choose a password") }}
                             </div>
                             {% if form.password.errors %}
                                 {% for error in form.password.errors %}
@@ -57,15 +57,31 @@
                                 {% endfor %}
                             {% endif %}
                         </div>
+                        <div class="mb-4">
+                            <label for="{{ form.confirm_password.id }}" class="form-label">
+                                <i class="fas fa-check-double me-2"></i>{{ form.confirm_password.label.text }}
+                            </label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-shield-alt"></i></span>
+                                {{ form.confirm_password(class="form-control", placeholder="Confirm your password") }}
+                            </div>
+                            {% if form.confirm_password.errors %}
+                                {% for error in form.confirm_password.errors %}
+                                    <span class="text-danger">
+                                        <i class="fas fa-exclamation-circle me-1"></i>{{ error }}
+                                    </span>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
                         <div class="d-grid gap-2">
                             <button type="submit" class="btn btn-primary btn-lg">
-                                <i class="fas fa-sign-in-alt me-2"></i>Login
+                                <i class="fas fa-user-plus me-2"></i>Create Account
                             </button>
                         </div>
                         <div class="text-center mt-4">
                             <p class="mb-0">
-                                <i class="fas fa-user-plus me-2"></i>Don't have an account? 
-                                <a href="{{ url_for('signup') }}" class="text-primary text-decoration-none fw-bold">Sign up here</a>
+                                <i class="fas fa-sign-in-alt me-2"></i>Already have an account? 
+                                <a href="{{ url_for('login') }}" class="text-primary text-decoration-none fw-bold">Login here</a>
                             </p>
                         </div>
                     </form>

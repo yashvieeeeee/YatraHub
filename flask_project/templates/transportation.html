@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block title %}YatriHub: Transportation{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <h1 class="mb-4">
+        <i class="fas fa-route me-2"></i>How will you get around?
+    </h1>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <form method="POST">
+                {{ form.hidden_tag() }}
+                <div class="mb-4">
+                    <label class="form-label h5">
+                        <i class="fas fa-directions me-2"></i>{{ form.transportation_method.label.text }}
+                    </label>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="transport-option card h-100">
+                                <div class="form-check p-3">
+                                    <input class="form-check-input" type="checkbox" name="transportation_method" id="flight" value="flight">
+                                    <label class="form-check-label w-100" for="flight">
+                                        <i class="fas fa-plane-departure fa-2x mb-2 text-primary"></i>
+                                        <h5>Flight</h5>
+                                        <small class="text-muted">Best for long distances</small>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="transport-option card h-100">
+                                <div class="form-check p-3">
+                                    <input class="form-check-input" type="checkbox" name="transportation_method" id="train" value="train">
+                                    <label class="form-check-label w-100" for="train">
+                                        <i class="fas fa-train fa-2x mb-2 text-success"></i>
+                                        <h5>Train</h5>
+                                        <small class="text-muted">Scenic and comfortable</small>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="transport-option card h-100">
+                                <div class="form-check p-3">
+                                    <input class="form-check-input" type="checkbox" name="transportation_method" id="car_rental" value="car_rental">
+                                    <label class="form-check-label w-100" for="car_rental">
+                                        <i class="fas fa-car fa-2x mb-2 text-warning"></i>
+                                        <h5>Car Rental</h5>
+                                        <small class="text-muted">Freedom to explore</small>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="transport-option card h-100">
+                                <div class="form-check p-3">
+                                    <input class="form-check-input" type="checkbox" name="transportation_method" id="local_transport" value="local_transport">
+                                    <label class="form-check-label w-100" for="local_transport">
+                                        <i class="fas fa-bus fa-2x mb-2 text-info"></i>
+                                        <h5>Local Transport</h5>
+                                        <small class="text-muted">Authentic experience</small>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% if form.transportation_method.errors %}
+                        <div class="alert alert-danger mt-3">
+                            <i class="fas fa-exclamation-circle me-2"></i>{{ form.transportation_method.errors[0] }}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="mb-4">
+                    <label for="{{ form.reason_for_visiting.id }}" class="form-label h5">
+                        <i class="fas fa-comment-alt me-2"></i>{{ form.reason_for_visiting.label.text }}
+                    </label>
+                    {{ form.reason_for_visiting(class="form-control", rows="3", placeholder="Tell us why you're visiting...") }}
+                    {% if form.reason_for_visiting.errors %}
+                        <div class="alert alert-danger mt-2">
+                            <i class="fas fa-exclamation-circle me-2"></i>{{ form.reason_for_visiting.errors[0] }}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary btn-lg">
+                        <i class="fas fa-arrow-right me-2"></i>Next
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

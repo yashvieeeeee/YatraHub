@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block title %}YatriHub: Select Accommodation{% endblock %}
+
+{% block head %}
+    <!-- Add Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+{% endblock %}
+
+{% block content %}
+    <h1><i class="fas fa-hotel"></i> Choose your Accommodation</h1>
+
+    {% if accommodations %}
+        <div class="row">
+            {% for accommodation in accommodations %}
+                <div class="col-md-6 mb-3">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <i class="fas fa-building"></i> {{ accommodation.name }}
+                            </h5>
+                            <p class="card-text">
+                                <small class="text-muted">
+                                    <i class="fas fa-map-marker-alt"></i> Distance: {{ accommodation.distance|default('Unknown') }} meters<br>
+                                    <i class="fas fa-tag"></i> Price: {{ accommodation.price|default('N/A') }}
+                                </small>
+                            </p>
+                            <button class="btn btn-primary select-accommodation w-100" 
+                                    data-name="{{ accommodation.name }}"
+                                    data-lat="{{ accommodation.lat }}"
+                                    data-lon="{{ accommodation.lon }}">
+                                <i class="fas fa-check-circle"></i> Select
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-info">
+            <i class="fas fa-info-circle"></i> No accommodations found near your destination. Please try again later.
+        </div>
+    {% endif %}
+
+    <form method="POST" class="mt-4">
+        {{ form.hidden_tag() }}
+        <div class="mb-3">
+            <label for="{{ form.accommodation.id }}" class="form-label">
+                <i class="fas fa-bed"></i> {{ form.accommodation.label.text }}
+            </label>
+            {{ form.accommodation(class="form-control") }}
+            {% if form.accommodation.errors %}
+                <small class="text-danger">
+                    <i class="fas fa-exclamation-circle"></i> {{ form.accommodation.errors[0] }}
+                </small>
+            {% endif %}
+        </div>
+        <div class="mb-3">
+            <label for="{{ form.accommodation_details.id }}" class="form-label">
+                <i class="fas fa-info-circle"></i> {{ form.accommodation_details.label.text }}
+            </label>
+            {{ form.accommodation_details(class="form-control", rows="3") }}
+            {% if form.accommodation_details.errors %}
+                <small class="text-danger">
+                    <i class="fas fa-exclamation-circle"></i> {{ form.accommodation_details.errors[0] }}
+                </small>
+            {% endif %}
+        </div>
+        <button type="submit" class="btn btn-primary">
+            <i class="fas fa-arrow-right"></i> Next
+        </button>
+    </form>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const buttons = document.querySelectorAll('.select-accommodation');
+    const accommodationInput = document.getElementById('accommodation');
+    const detailsInput = document.getElementById('accommodation_details');
+
+    buttons.forEach(button => {
+        button.addEventListener('click', function() {
+            const name = this.dataset.name;
+            const lat = this.dataset.lat;
+            const lon = this.dataset.lon;
+            
+            accommodationInput.value = name;
+            detailsInput.value = `Location: ${lat}, ${lon}`;
+        });
+    });
+});
+</script>
+{% endblock %}

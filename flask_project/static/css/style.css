@@ -1,0 +1,560 @@
+body {
+    font-family: sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header, footer {
+    background-color: #333;
+    color: #fff;
+    padding: 1rem 0;
+    text-align: center;
+}
+
+main {
+    padding: 1rem;
+}
+
+.flash-messages {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+}
+
+.flash-messages li {
+    padding: 0.5rem;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+}
+
+form div {
+    margin-bottom: 1rem;
+}
+
+form label {
+    display: block;
+    margin-bottom: 0.2rem;
+}
+
+.suggestion {
+  padding: 5px;
+  cursor: pointer;
+  border-bottom: 1px solid #ddd;
+}
+
+.suggestion:hover {
+  background-color: #f0f0f0;
+}
+
+textarea {
+  width: 80%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border:  1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+
+#gemini-text h2 {
+    color: #007bff;
+    margin-top: 10px;
+}
+
+#gemini-text p {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+#gemini-text ul {
+    padding-left: 20px;
+}
+
+#gemini-text strong {
+    color: #dc3545; /* Red for emphasis */
+}
+
+.btn-outline-secondary:hover {
+    background-color: #6c757d;
+    color: white;
+}
+
+
+.navbar {
+    box-shadow: 0 2px 4px rgba(0,0,0,.1);
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.nav-link {
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    transform: translateY(-1px);
+}
+
+.alert {
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,.05);
+}
+
+footer {
+    box-shadow: 0 -2px 4px rgba(0,0,0,.1);
+    position: relative;
+    width: 100%;
+    bottom: 0 !important;
+}
+
+/* Card styling */
+.card {
+    transition: transform 0.2s ease-in-out;
+    border: none;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+}
+
+.shadow-sm {
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;
+}
+
+/* Table styling */
+.table-responsive {
+    border-radius: .25rem;
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);
+}
+
+.table th {
+    background-color: #f8f9fa;
+    border-top: none;
+}
+
+/* Button styling */
+.btn-group .btn {
+    border-radius: .25rem;
+}
+
+/* Form styling */
+.form-control:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.25rem rgba(13,110,253,.25);
+}
+
+/* Date selection page styles */
+.date-picker {
+    background-color: #fff;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    padding: 0.5rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.date-picker:focus {
+    border-color: #86b7fe;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+.input-group-text {
+    background-color: #f8f9fa;
+    border: 1px solid #ced4da;
+}
+
+.btn-lg {
+    padding: 0.75rem 1.5rem;
+    font-size: 1.1rem;
+}
+
+.card {
+    border: none;
+    border-radius: 0.5rem;
+}
+
+.shadow-sm {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+}
+
+
+/* Add these styles for destination page */
+.destination-container {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Custom scrollbar for suggestions box */
+#suggestions-box::-webkit-scrollbar {
+    width: 8px;
+}
+
+#suggestions-box::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+#suggestions-box::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+#suggestions-box::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+
+/* Login page specific styles */
+.card {
+    border: none;
+    border-radius: 1rem;
+    transition: transform 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-header {
+    border-top-left-radius: 1rem !important;
+    border-top-right-radius: 1rem !important;
+}
+
+.input-group-text {
+    background-color: #f8f9fa;
+    border: 1px solid #ced4da;
+}
+
+.form-control {
+    border: 1px solid #ced4da;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.form-control:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.25rem rgba(13,110,253,.25);
+    background-color: #fff;
+}
+
+.btn-lg {
+    padding: 0.75rem 1.5rem;
+    font-size: 1.1rem;
+}
+
+.text-primary {
+    color: #0d6efd !important;
+}
+
+.fw-bold {
+    font-weight: 600 !important;
+}
+
+
+/* Past submissions page styles */
+.hover-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: none;
+    border-radius: 0.5rem;
+}
+
+.hover-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15) !important;
+}
+
+.card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid rgba(0,0,0,0.125);
+    padding: 1rem;
+}
+
+.card-title {
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+.card-subtitle {
+    font-size: 0.9rem;
+}
+
+.card-text p {
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.card-text strong {
+    margin-right: 0.5rem;
+    color: #495057;
+}
+
+.btn {
+    padding: 0.5rem 1rem;
+    font-weight: 500;
+}
+
+.alert-info {
+    background-color: #cce5ff;
+    border-color: #b8daff;
+    color: #004085;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.alert-link {
+    color: #002752;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.alert-link:hover {
+    text-decoration: underline;
+}
+
+/* Place Information Page Styles */
+.hero-banner {
+    height: 300px;
+    border-radius: 1rem;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.destination-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.6));
+}
+
+.hero-title {
+    position: absolute;
+    bottom: 2rem;
+    left: 2rem;
+    margin: 0;
+    font-size: 2.5rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.text-highlight {
+    color: #fff;
+    font-weight: bold;
+}
+
+.hover-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hover-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15) !important;
+}
+
+.weather-info {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    padding: 1rem;
+}
+
+.weather-main {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.weather-details {
+    font-size: 1.1rem;
+}
+
+.temperature {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.tips-container {
+    background: #f8f9fa;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    margin-top: 1rem;
+}
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    font-weight: 500;
+    border-radius: 0.5rem;
+}
+
+.alert {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 1rem 0;
+    border-radius: 0.5rem;
+}
+
+/* Signup page specific styles */
+.card {
+    border: none;
+    border-radius: 1rem;
+    transition: transform 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-header {
+    border-top-left-radius: 1rem !important;
+    border-top-right-radius: 1rem !important;
+}
+
+.input-group-text {
+    background-color: #f8f9fa;
+    border: 1px solid #ced4da;
+    width: 45px;
+    justify-content: center;
+}
+
+.form-control {
+    border: 1px solid #ced4da;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.form-control:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.25rem rgba(13,110,253,.25);
+    background-color: #fff;
+}
+
+.text-danger {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+}
+
+.btn-lg {
+    padding: 0.75rem 1.5rem;
+    font-size: 1.1rem;
+}
+
+.text-primary {
+    color: #0d6efd !important;
+}
+
+.fw-bold {
+    font-weight: 600 !important;
+}
+
+/* Transportation page styles */
+.transport-option {
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 1px solid #dee2e6;
+}
+
+.transport-option:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,.15);
+}
+
+.transport-option .form-check-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.transport-option .form-check-input {
+    margin-left: 0;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+}
+
+.transport-option .form-check-input:checked + .form-check-label {
+    color: #0d6efd;
+}
+
+.transport-option .form-check-input:checked + .form-check-label i {
+    transform: scale(1.1);
+}
+
+.transport-option h5 {
+    margin: 0.5rem 0;
+    font-weight: 600;
+}
+
+.alert {
+    border-radius: 0.5rem;
+    border: none;
+}
+
+.btn-lg {
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    border-radius: 0.5rem;
+}
+
+/* Carousel animations */
+.carousel-fade .carousel-item {
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+}
+
+.carousel-fade .carousel-item.active {
+    opacity: 1;
+}
+
+#suggestions-box {
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(8px);
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    width: 5%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.carousel:hover .carousel-control-prev,
+.carousel:hover .carousel-control-next {
+    opacity: 0.8;
+}
+
+.carousel-item {
+    transition: transform 1.2s ease-in-out;
+}
+
+.carousel-fade .carousel-item {
+    transition: opacity 1.2s ease-in-out;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    padding: 1.5rem;
+}
