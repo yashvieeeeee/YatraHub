@@ -34,17 +34,7 @@ git clone https://github.com/yourusername/yatrahub.git
 cd yatrahub
 ```
 
-2. Create virtual environment (requires Python 3.12.7):
-```bash
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-```
-```bash
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-```
-
-3. Install dependencies:
+2. Install dependencies:
 ```bash
 pip install -r requirements.txt
 ```
