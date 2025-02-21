@@ -11,3 +11,4 @@ aiohttp
 requests
 werkzeug
 wtforms
+wkhtmltopdf
