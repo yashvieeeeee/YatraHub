@@ -17,7 +17,7 @@ from models import User
 load_dotenv()
 
 # Get the path to the wkhtmltopdf executable from environment variables
-wkhtmltopdf_path = os.getenv('WKHTMLTOPDF_PATH', r"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe")
+wkhtmltopdf_path = os.getenv('WKHTMLTOPDF_PATH',r"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe")
 
 # Specify the path to the wkhtmltopdf executable
 config = pdfkit.configuration(wkhtmltopdf=wkhtmltopdf_path)

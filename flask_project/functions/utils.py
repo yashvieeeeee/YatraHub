@@ -253,7 +253,7 @@ give it in raw HTML code. NO MARKDOWN SYNTAX ALLOWED
             raise ValueError("Google Gemini API key is not set")
 
         genai.configure(api_key=api_key)
-        model = genai.GenerativeModel('gemini-pro')
+        model = genai.GenerativeModel('gemini-2.0-flash')
         
         print(f"DEBUG: Sending prompt to Gemini API: {prompt}")  # Debug log
         response = model.generate_content(prompt)
@@ -320,7 +320,7 @@ def generate_itinerary(destination, start_date, end_date, travelers, accommodati
             raise ValueError("Google Gemini API key is not set")
 
         genai.configure(api_key=api_key)
-        model = genai.GenerativeModel('gemini-pro')
+        model = genai.GenerativeModel('gemini-2.0-flash')
         
         print(f"DEBUG: Sending prompt to Gemini API: {prompt}")  # Debug log
         response = model.generate_content(prompt)

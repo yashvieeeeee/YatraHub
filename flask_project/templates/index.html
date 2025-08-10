@@ -117,7 +117,7 @@
     <div class="carousel-inner">
         {% for i in range(1, 15) %}  {# Creates a loop from 1 to 6 #}
             <div class="carousel-item {% if i == 1 %}active{% endif %}">
-                <img src="{{ url_for('static', filename='images/destination' ~ i ~ '.jpg') }}" 
+                <img src="{{ url_for('static', filename='images/destination' ~ i ~ '.jpg', _t=timestamp) }}" alt="Travel Destination {{ i }}">
                      alt="Travel Destination {{ i }}"
                      onerror="this.src='{{ url_for('static', filename='images/default-destination.jpg') }}'">
             </div>
